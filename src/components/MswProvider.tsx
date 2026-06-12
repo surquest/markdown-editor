@@ -13,9 +13,17 @@ export function MswProvider({ children }: { children: React.ReactNode }) {
         const { worker } = await import('../mocks/browser');
         // `worker.start()` returns a Promise that resolves
         // once the Service Worker is up and ready to intercept requests.
-        await worker.start({
-          onUnhandledRequest: 'bypass',
-        });
+        try {
+          await worker.start({
+            serviceWorker: {
+              url: '/markdown-editor/mockServiceWorker.js'
+            },
+            onUnhandledRequest: 'bypass',
+          });
+        } catch (error) {
+          console.error('Failed to start MSW:', error);
+        }
+        
         if (mounted) {
           setIsReady(true);
         }

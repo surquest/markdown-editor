@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: "/markdown-editor/", 
+  basePath: "/markdown-editor", 
 };
 
 export default nextConfig;
