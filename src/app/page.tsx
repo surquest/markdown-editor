@@ -15,7 +15,8 @@ function EditorLoader() {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      fetch(`/documents/${docFilename}`)
+      const basePath = process.env.NODE_ENV === 'production' ? '/markdown-editor' : '';
+      fetch(`${basePath}/documents/${docFilename}`)
         .then((res) => {
           if (!res.ok) throw new Error('Network response was not ok');
           return res.text();
